@@ -1,0 +1,6 @@
+{
+  "name": "Kéo Co Xanh Đỏ",
+  "description": "Trò chơi đố vui kéo co đối kháng giữa Đội Xanh và Đội Đỏ với 10 câu hỏi mỗi bên.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

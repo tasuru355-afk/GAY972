@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kéo Co Trí Tuệ Xanh & Đỏ (Tug of War Quiz)</title>
+  <meta name="description" content="Trò chơi kéo co đối kháng 2 đội trả lời câu hỏi trắc nghiệm trí tuệ. Đúng được kéo, sai bị trừ điểm và lùi lại." />
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+    <!-- Header & Scoreboard -->
+    <header class="header-card">
+      <div class="header-top">
+        <div class="app-title-group">
+          <div class="app-icon">⚔️</div>
+          <div>
+            <h1 class="app-title">KÉO CO TRÍ TUỆ XANH & ĐỎ</h1>
+            <p class="app-subtitle">Mỗi bên 10 câu hỏi • Trả lời đúng được kéo • Trả lời sai trừ điểm và lùi lại</p>
+          </div>
+        </div>
+
+        <div class="mode-selector">
+          <button id="mode-split-screen" class="mode-btn active" onclick="setGameMode('split-screen')">
+            ⚡ Song Đấu 2 Bên
+          </button>
+          <button id="mode-turn-based" class="mode-btn" onclick="setGameMode('turn-based')">
+            🔄 Luân Phiên
+          </button>
+          <button id="mode-vs-bot" class="mode-btn" onclick="setGameMode('vs-bot')">
+            🤖 Đấu Với Máy
+          </button>
+        </div>
+
+        <div class="header-actions">
+          <button id="sound-btn" class="icon-btn" onclick="toggleSound()">🔊 Bật</button>
+          <button class="icon-btn" onclick="openModal('rules-modal')">📜 Luật Chơi</button>
+          <button class="icon-btn" onclick="openModal('settings-modal')">⚙️ Cài Đặt</button>
+          <button class="icon-btn" style="color: #dc2626;" onclick="resetGame()">🔄 Trận Mới</button>
+        </div>
+      </div>
+
+      <!-- Scoreboard -->
+      <div class="score-row">
+        <div class="team-score-box blue">
+          <div>
+            <div class="team-info-name">ĐỘI XANH (BÊN TRÁI)</div>
+            <div class="team-info-sub" id="blue-correct-tag">Đúng 0/10</div>
+          </div>
+          <div class="team-points" id="blue-score">0</div>
+        </div>
+
+        <div class="versus-box">
+          <div class="versus-tag" id="round-badge">Hiệp 1 / 10</div>
+          <span style="margin-top: 4px; font-size: 14px;">VS</span>
+        </div>
+
+        <div class="team-score-box red">
+          <div class="team-points" id="red-score">0</div>
+          <div style="text-align: right;">
+            <div class="team-info-name">ĐỘI ĐỎ (BÊN PHẢI)</div>
+            <div class="team-info-sub" id="red-correct-tag">Đúng 0/10</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Arena Stage SVG -->
+    <div class="arena-card">
+      <div id="banner-action" class="banner-action"></div>
+
+      <svg class="arena-svg" viewBox="0 0 1000 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sky & Ground Background -->
+        <rect width="1000" height="240" fill="#f8fafc" />
+        <rect y="170" width="1000" height="70" fill="#e2e8f0" />
+        <line x1="0" y1="170" x2="1000" y2="170" stroke="#cbd5e1" stroke-width="3" />
+
+        <!-- Center Line & Victory Boundary Lines -->
+        <line x1="500" y1="120" x2="500" y2="220" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6 6" />
+        <circle cx="500" cy="170" r="10" fill="#cbd5e1" />
+        
+        <!-- Blue Win Line (Left) -->
+        <line x1="310" y1="140" x2="310" y2="210" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="4 4" />
+        <text x="310" y="130" text-anchor="middle" fill="#2563eb" font-size="11" font-weight="800">VẠCH THẮNG XANH</text>
+
+        <!-- Red Win Line (Right) -->
+        <line x1="690" y1="140" x2="690" y2="210" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4 4" />
+        <text x="690" y="130" text-anchor="middle" fill="#dc2626" font-size="11" font-weight="800">VẠCH THẮNG ĐỎ</text>
+
+        <!-- Dynamic Rope Group (Moves horizontally with state.ropePosition) -->
+        <g id="rope-group" class="rope-group">
+          <!-- The Main Rope -->
+          <path d="M 80 170 Q 500 178 920 170" stroke="#b45309" stroke-width="8" stroke-linecap="round" />
+          <path d="M 80 170 Q 500 178 920 170" stroke="#fef3c7" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 6" />
+
+          <!-- Center Red Ribbon / Flag -->
+          <polygon points="500,162 490,140 510,140" fill="#dc2626" />
+          <line x1="500" y1="140" x2="500" y2="178" stroke="#ef4444" stroke-width="4" stroke-linecap="round" />
+
+          <!-- BLUE TEAM PULLERS (Left Side) -->
+          <!-- Player 1 Blue -->
+          <g class="puller-blue" transform="translate(260, 100)">
+            <circle cx="20" cy="20" r="14" fill="#fbbf24" />
+            <path d="M 12 12 Q 20 8 28 12" stroke="#1e3a8a" stroke-width="4" fill="none" />
+            <!-- Eyes & Bandana -->
+            <circle cx="16" cy="18" r="2.5" fill="#0f172a" />
+            <circle cx="24" cy="18" r="2.5" fill="#0f172a" />
+            <!-- Body leaning back -->
+            <line x1="20" y1="34" x2="10" y2="70" stroke="#2563eb" stroke-width="12" stroke-linecap="round" />
+            <!-- Arms pulling rope -->
+            <path d="M 16 45 L 35 68 L 50 70" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" fill="none" />
+            <!-- Legs planted back -->
+            <path d="M 10 70 L -4 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+            <path d="M 10 70 L 16 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+          </g>
+
+          <!-- Player 2 Blue -->
+          <g class="puller-blue" transform="translate(190, 100)">
+            <circle cx="20" cy="20" r="14" fill="#fbbf24" />
+            <path d="M 12 12 Q 20 8 28 12" stroke="#1e3a8a" stroke-width="4" fill="none" />
+            <circle cx="16" cy="18" r="2.5" fill="#0f172a" />
+            <circle cx="24" cy="18" r="2.5" fill="#0f172a" />
+            <line x1="20" y1="34" x2="8" y2="70" stroke="#3b82f6" stroke-width="12" stroke-linecap="round" />
+            <path d="M 16 45 L 40 68 L 60 70" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" fill="none" />
+            <path d="M 8 70 L -6 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+            <path d="M 8 70 L 16 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+          </g>
+
+          <!-- RED TEAM PULLERS (Right Side) -->
+          <!-- Player 1 Red -->
+          <g class="puller-red" transform="translate(680, 100)">
+            <circle cx="20" cy="20" r="14" fill="#fcd34d" />
+            <path d="M 12 12 Q 20 8 28 12" stroke="#991b1b" stroke-width="4" fill="none" />
+            <circle cx="16" cy="18" r="2.5" fill="#0f172a" />
+            <circle cx="24" cy="18" r="2.5" fill="#0f172a" />
+            <line x1="20" y1="34" x2="30" y2="70" stroke="#dc2626" stroke-width="12" stroke-linecap="round" />
+            <path d="M 24 45 L 5 68 L -10 70" stroke="#fcd34d" stroke-width="6" stroke-linecap="round" fill="none" />
+            <path d="M 30 70 L 44 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+            <path d="M 30 70 L 24 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+          </g>
+
+          <!-- Player 2 Red -->
+          <g class="puller-red" transform="translate(750, 100)">
+            <circle cx="20" cy="20" r="14" fill="#fcd34d" />
+            <path d="M 12 12 Q 20 8 28 12" stroke="#991b1b" stroke-width="4" fill="none" />
+            <circle cx="16" cy="18" r="2.5" fill="#0f172a" />
+            <circle cx="24" cy="18" r="2.5" fill="#0f172a" />
+            <line x1="20" y1="34" x2="32" y2="70" stroke="#ef4444" stroke-width="12" stroke-linecap="round" />
+            <path d="M 24 45 L 0 68 L -20 70" stroke="#fcd34d" stroke-width="6" stroke-linecap="round" fill="none" />
+            <path d="M 32 70 L 46 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+            <path d="M 32 70 L 24 100" stroke="#1e293b" stroke-width="8" stroke-linecap="round" />
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Questions Side-by-Side Area -->
+    <main class="question-grid">
+      <!-- Blue Team Question Card (Left) -->
+      <section id="blue-q-card" class="q-card blue-card active-turn">
+        <!-- Rendered by script.js -->
+      </section>
+
+      <!-- Red Team Question Card (Right) -->
+      <section id="red-q-card" class="q-card red-card active-turn">
+        <!-- Rendered by script.js -->
+      </section>
+    </main>
+  </div>
+
+  <!-- Rules Modal -->
+  <div id="rules-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeModal('rules-modal')">✕</button>
+      <h2 class="modal-title">📜 Luật Chơi Kéo Co Trí Tuệ</h2>
+      <ul style="padding-left: 20px; font-size: 13px; line-height: 1.6; color: #334155; display: flex; flex-direction: column; gap: 8px;">
+        <li><strong>Mục tiêu:</strong> Dùng kiến thức trả lời đúng 10 câu hỏi để kéo dây về phía đội mình và giành chiến thắng!</li>
+        <li><strong>Trả lời đúng:</strong> <span style="color: #16a34a; font-weight: 800;">+100 điểm</span> và kéo dây về phía mình 14% khoảng cách.</li>
+        <li><strong>Trả lời sai / Hết giờ / Bỏ qua:</strong> <span style="color: #dc2626; font-weight: 800;">-50 điểm</span>, đội bị lùi lại và dây bị kéo về phía đối phương.</li>
+        <li><strong>Nút Qua câu:</strong> Nếu không biết đáp án, bấm "Qua câu" để lập tức xem đáp án đúng và tiếp tục thi đấu.</li>
+        <li><strong>Chiến thắng Knockout:</strong> Kéo dây vượt qua vạch chiến thắng trước khi hết 10 câu sẽ thắng ngay tức khắc!</li>
+      </ul>
+      <button class="btn-primary" onclick="closeModal('rules-modal')">Đã Hiểu, Bắt Đầu Chơi!</button>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeModal('settings-modal')">✕</button>
+      <h2 class="modal-title">⚙️ Cài Đặt Trận Đấu</h2>
+      
+      <div class="form-group">
+        <label class="form-label">Tên Đội Xanh (Bên Trái)</label>
+        <input type="text" id="setting-blue-name" class="form-input" value="Đội Xanh" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tên Đội Đỏ (Bên Phải)</label>
+        <input type="text" id="setting-red-name" class="form-input" value="Đội Đỏ" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Cơ chế câu hỏi 2 đội</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <button type="button" class="icon-btn" style="justify-content: center;" onclick="state.sameQuestions=false; resetGame();">
+            🔀 Đề riêng biệt
+          </button>
+          <button type="button" class="icon-btn" style="justify-content: center;" onclick="state.sameQuestions=true; resetGame();">
+            🎯 Cùng 1 câu hỏi
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="
+        state.blue.name = document.getElementById('setting-blue-name').value || 'Đội Xanh';
+        state.red.name = document.getElementById('setting-red-name').value || 'Đội Đỏ';
+        closeModal('settings-modal');
+        resetGame();
+      ">
+        Lưu & Bắt Đầu Lại
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Over Celebration Modal -->
+  <div id="game-over-modal" class="modal-overlay">
+    <div class="modal-content" style="text-align: center;">
+      <div style="font-size: 52px; margin-bottom: 8px;">🏆</div>
+      <h2 id="winner-modal-title" class="modal-title" style="font-size: 22px;"></h2>
+      <p id="winner-modal-reason" style="font-size: 13px; color: #475569;"></p>
+      
+      <div id="winner-modal-stats"></div>
+
+      <button class="btn-primary" onclick="resetGame()">🔄 Chơi Lại Trận Mới</button>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
