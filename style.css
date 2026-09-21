@@ -67,7 +67,7 @@ body {
 }
 
 .app-wrapper {
-  max-width: 1200px;
+  max-width: 1560px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -229,6 +229,32 @@ body {
   background: #4338ca;
 }
 
+/* Header 15s Timer Tag */
+.header-timer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  font-size: 0.8rem;
+  font-weight: 800;
+  user-select: none;
+}
+.timer-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f59e0b;
+  animation: timerPulseDot 1.5s infinite ease-in-out;
+}
+@keyframes timerPulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+
 /* Teams score cards bar */
 .scores-banner {
   display: grid;
@@ -329,6 +355,14 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-md);
   position: relative;
+}
+
+.center-arena {
+  position: sticky;
+  top: 14px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
 }
 
 .arena-header {
@@ -459,18 +493,98 @@ body {
 }
 
 /* ==========================================================================
-   QUESTION PANELS (DUAL COLUMN BATTLE)
+   BATTLE ARENA & QUESTION BOARDS LAYOUT (BOARDS PLACED BEHIND TEAMS)
    ========================================================================== */
-.battle-columns {
+.battle-arena-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(320px, 1fr) minmax(380px, 1.25fr) minmax(320px, 1fr);
   gap: 16px;
+  align-items: start;
 }
 
-@media (max-width: 840px) {
-  .battle-columns {
+@media (max-width: 1140px) {
+  .battle-arena-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+  .center-arena {
+    grid-column: 1 / -1;
+    order: -1;
+    position: static !important;
+  }
+}
+
+@media (max-width: 740px) {
+  .battle-arena-layout {
     grid-template-columns: 1fr;
   }
+}
+
+/* Arena Live Status & Guidance Bar */
+.arena-footer-bar {
+  background: #0f172a;
+  border-top: 1px solid #1e293b;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: #94a3b8;
+  font-weight: 700;
+  user-select: none;
+}
+
+.footer-team-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.blue-hint { color: #60a5fa; }
+.red-hint { color: #f87171; }
+
+.hint-score-tag {
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+.blue-hint .hint-score-tag {
+  background: #1e3a8a;
+  color: #93c5fd;
+  border: 1px solid #2563eb;
+}
+.red-hint .hint-score-tag {
+  background: #7f1d1d;
+  color: #fca5a5;
+  border: 1px solid #dc2626;
+}
+
+.footer-center-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  text-align: center;
+}
+.arena-live-icon {
+  color: #f59e0b;
+  animation: arenaLivePulse 1.2s infinite ease-in-out;
+}
+@keyframes arenaLivePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.7; }
+}
+
+/* Stadium Billboards in SVG */
+.stadium-board {
+  transition: transform 0.3s ease;
+}
+.stadium-board:hover {
+  transform: translateY(-2px);
 }
 
 .team-column {
@@ -492,18 +606,56 @@ body {
 
 .team-column-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 8px;
+}
+.team-header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .team-column-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1rem;
+  font-size: 0.96rem;
   font-weight: 900;
 }
 .blue-side .team-column-title { color: var(--blue-dark); }
 .red-side .team-column-title { color: var(--red-dark); }
+
+.team-position-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+}
+.blue-pos {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+}
+.red-pos {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.team-time-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--slate-100);
+  border: 1px solid var(--slate-200);
+  color: var(--slate-600);
+  white-space: nowrap;
+}
 
 /* Number Navigation Pills (1 to 10) */
 .pills-nav {
@@ -882,6 +1034,217 @@ body {
 }
 .red-side .btn-next-tab:hover {
   background: var(--red-dark);
+}
+
+/* ==========================================================================
+   15-SECOND QUESTION TIMER ENGINE (PURE CSS, ZERO JAVASCRIPT)
+   ========================================================================== */
+
+/* 15s Countdown Badge */
+.q-timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+  font-size: 0.76rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.timer-flame {
+  font-size: 0.85rem;
+  animation: timerFlamePulse 1s infinite alternate ease-in-out;
+}
+@keyframes timerFlamePulse {
+  from { transform: scale(0.92); }
+  to { transform: scale(1.15); }
+}
+
+/* 15s countdown animation in text using steps(15, end) */
+.timer-countdown::after {
+  content: "15s";
+  animation: countdownText15s 15s steps(15, end) forwards;
+}
+
+@keyframes countdownText15s {
+  0.00%  { content: "15s"; }
+  6.66%  { content: "14s"; }
+  13.33% { content: "13s"; }
+  20.00% { content: "12s"; }
+  26.66% { content: "11s"; }
+  33.33% { content: "10s"; }
+  40.00% { content: "9s"; color: #b45309; }
+  46.66% { content: "8s"; }
+  53.33% { content: "7s"; }
+  60.00% { content: "6s"; }
+  66.66% { content: "5s"; color: #dc2626; font-weight: 900; }
+  73.33% { content: "4s"; color: #dc2626; }
+  80.00% { content: "3s"; color: #dc2626; }
+  86.66% { content: "2s"; color: #dc2626; }
+  93.33% { content: "1s"; color: #dc2626; }
+  100.0% { content: "0s (Hết giờ)"; color: #dc2626; }
+}
+
+/* Timer Progress Track */
+.timer-track {
+  width: 100%;
+  height: 6px;
+  background: var(--slate-200);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin: 8px 0 14px 0;
+  position: relative;
+}
+
+.timer-bar {
+  height: 100%;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  transform-origin: left center;
+  animation: timerBarDrain 15s linear forwards;
+}
+
+.blue-side .timer-bar {
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+}
+.red-side .timer-bar {
+  background: linear-gradient(90deg, #dc2626, #f97316);
+}
+
+@keyframes timerBarDrain {
+  0% {
+    width: 100%;
+  }
+  65% {
+    background: #f59e0b;
+  }
+  85% {
+    background: #ef4444;
+  }
+  100% {
+    width: 0%;
+    background: #dc2626;
+  }
+}
+
+/* When question is answered: freeze timer progress and mark done */
+.question-card:has(input[type="radio"]:checked) .timer-bar {
+  animation-play-state: paused;
+  opacity: 0.3;
+}
+
+.question-card:has(input[type="radio"]:checked) .q-timer-badge {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+  color: var(--success);
+}
+.question-card:has(input[type="radio"]:checked) .timer-flame {
+  animation: none;
+}
+.question-card:has(input[type="radio"]:checked) .timer-countdown::after {
+  content: "Đã nộp" !important;
+  animation: none !important;
+  color: #15803d !important;
+}
+
+/* Timeout Alert: Appears automatically at 15s if no option was chosen */
+.timeout-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+  border-radius: var(--radius-md);
+  margin-top: 12px;
+  animation: timeoutAlertReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) 15s forwards;
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@keyframes timeoutAlertReveal {
+  0%, 99.9% {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    max-height: 140px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: 12px;
+    pointer-events: auto;
+  }
+}
+
+/* Once any answer or skip is checked: completely hide and disable timeout alert */
+.question-card:has(input[type="radio"]:checked) .timeout-alert {
+  display: none !important;
+  animation: none !important;
+}
+
+.timeout-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.timeout-icon {
+  font-size: 1.5rem;
+  animation: timeoutShake 0.6s infinite ease-in-out;
+}
+@keyframes timeoutShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+.timeout-title {
+  font-size: 0.88rem;
+  font-weight: 900;
+  color: #991b1b;
+  line-height: 1.2;
+}
+.timeout-sub {
+  font-size: 0.75rem;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.btn-timeout-forfeit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: #dc2626;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
+  text-decoration: none;
+}
+.btn-timeout-forfeit:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================

@@ -1,18 +1,1501 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kéo Co Xanh Đỏ</title>
-    <meta name="description" content="Trò chơi đố vui kéo co đối kháng giữa Đội Xanh và Đội Đỏ với 10 câu hỏi mỗi bên." />
-    <meta property="og:title" content="Kéo Co Xanh Đỏ" />
-    <meta property="og:description" content="Trò chơi đố vui kéo co đối kháng giữa Đội Xanh và Đội Đỏ với 10 câu hỏi mỗi bên." />
+    <title>Kéo Co Xanh Đỏ - Đố Vui 15s Thuần HTML &amp; CSS</title>
+    <meta name="description" content="Trò chơi đố vui kéo co đối kháng giữa Đội Xanh và Đội Đỏ với 10 câu hỏi mỗi bên, thời gian 15s mỗi câu, thuần HTML và CSS không cần JavaScript." />
+    <meta property="og:title" content="Kéo Co Xanh Đỏ - Đố Vui 15s Thuần HTML &amp; CSS" />
+    <meta property="og:description" content="Trò chơi đố vui kéo co đối kháng giữa Đội Xanh và Đội Đỏ với 10 câu hỏi mỗi bên, thời gian 15s mỗi câu, thuần HTML và CSS." />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- PURE HTML & CSS TUG OF WAR GAME (NO JAVASCRIPT) -->
+    <form class="game-form" id="tug-game">
+      <!-- Modal Checkbox Toggles -->
+      <input type="checkbox" id="rules-toggle" class="modal-toggle" />
+      <input type="checkbox" id="deploy-toggle" class="modal-toggle" />
+
+      <!-- ==========================================
+           BLUE TEAM RADIO CHOICES (Hidden State Store)
+           ========================================== -->
+      <!-- Q1: C is correct -->
+      <input type="radio" name="b_q1" id="b_q1_a" class="hidden-radio b-w b-q1-w" />
+      <input type="radio" name="b_q1" id="b_q1_b" class="hidden-radio b-w b-q1-w" />
+      <input type="radio" name="b_q1" id="b_q1_c" class="hidden-radio b-c" />
+      <input type="radio" name="b_q1" id="b_q1_d" class="hidden-radio b-w b-q1-w" />
+      <input type="radio" name="b_q1" id="b_q1_s" class="hidden-radio b-s b-q1-w" />
+
+      <!-- Q2: A is correct -->
+      <input type="radio" name="b_q2" id="b_q2_a" class="hidden-radio b-c" />
+      <input type="radio" name="b_q2" id="b_q2_b" class="hidden-radio b-w b-q2-w" />
+      <input type="radio" name="b_q2" id="b_q2_c" class="hidden-radio b-w b-q2-w" />
+      <input type="radio" name="b_q2" id="b_q2_d" class="hidden-radio b-w b-q2-w" />
+      <input type="radio" name="b_q2" id="b_q2_s" class="hidden-radio b-s b-q2-w" />
+
+      <!-- Q3: B is correct -->
+      <input type="radio" name="b_q3" id="b_q3_a" class="hidden-radio b-w b-q3-w" />
+      <input type="radio" name="b_q3" id="b_q3_b" class="hidden-radio b-c" />
+      <input type="radio" name="b_q3" id="b_q3_c" class="hidden-radio b-w b-q3-w" />
+      <input type="radio" name="b_q3" id="b_q3_d" class="hidden-radio b-w b-q3-w" />
+      <input type="radio" name="b_q3" id="b_q3_s" class="hidden-radio b-s b-q3-w" />
+
+      <!-- Q4: C is correct -->
+      <input type="radio" name="b_q4" id="b_q4_a" class="hidden-radio b-w b-q4-w" />
+      <input type="radio" name="b_q4" id="b_q4_b" class="hidden-radio b-w b-q4-w" />
+      <input type="radio" name="b_q4" id="b_q4_c" class="hidden-radio b-c" />
+      <input type="radio" name="b_q4" id="b_q4_d" class="hidden-radio b-w b-q4-w" />
+      <input type="radio" name="b_q4" id="b_q4_s" class="hidden-radio b-s b-q4-w" />
+
+      <!-- Q5: B is correct -->
+      <input type="radio" name="b_q5" id="b_q5_a" class="hidden-radio b-w b-q5-w" />
+      <input type="radio" name="b_q5" id="b_q5_b" class="hidden-radio b-c" />
+      <input type="radio" name="b_q5" id="b_q5_c" class="hidden-radio b-w b-q5-w" />
+      <input type="radio" name="b_q5" id="b_q5_d" class="hidden-radio b-w b-q5-w" />
+      <input type="radio" name="b_q5" id="b_q5_s" class="hidden-radio b-s b-q5-w" />
+
+      <!-- Q6: A is correct -->
+      <input type="radio" name="b_q6" id="b_q6_a" class="hidden-radio b-c" />
+      <input type="radio" name="b_q6" id="b_q6_b" class="hidden-radio b-w b-q6-w" />
+      <input type="radio" name="b_q6" id="b_q6_c" class="hidden-radio b-w b-q6-w" />
+      <input type="radio" name="b_q6" id="b_q6_d" class="hidden-radio b-w b-q6-w" />
+      <input type="radio" name="b_q6" id="b_q6_s" class="hidden-radio b-s b-q6-w" />
+
+      <!-- Q7: D is correct -->
+      <input type="radio" name="b_q7" id="b_q7_a" class="hidden-radio b-w b-q7-w" />
+      <input type="radio" name="b_q7" id="b_q7_b" class="hidden-radio b-w b-q7-w" />
+      <input type="radio" name="b_q7" id="b_q7_c" class="hidden-radio b-w b-q7-w" />
+      <input type="radio" name="b_q7" id="b_q7_d" class="hidden-radio b-c" />
+      <input type="radio" name="b_q7" id="b_q7_s" class="hidden-radio b-s b-q7-w" />
+
+      <!-- Q8: B is correct -->
+      <input type="radio" name="b_q8" id="b_q8_a" class="hidden-radio b-w b-q8-w" />
+      <input type="radio" name="b_q8" id="b_q8_b" class="hidden-radio b-c" />
+      <input type="radio" name="b_q8" id="b_q8_c" class="hidden-radio b-w b-q8-w" />
+      <input type="radio" name="b_q8" id="b_q8_d" class="hidden-radio b-w b-q8-w" />
+      <input type="radio" name="b_q8" id="b_q8_s" class="hidden-radio b-s b-q8-w" />
+
+      <!-- Q9: D is correct -->
+      <input type="radio" name="b_q9" id="b_q9_a" class="hidden-radio b-w b-q9-w" />
+      <input type="radio" name="b_q9" id="b_q9_b" class="hidden-radio b-w b-q9-w" />
+      <input type="radio" name="b_q9" id="b_q9_c" class="hidden-radio b-w b-q9-w" />
+      <input type="radio" name="b_q9" id="b_q9_d" class="hidden-radio b-c" />
+      <input type="radio" name="b_q9" id="b_q9_s" class="hidden-radio b-s b-q9-w" />
+
+      <!-- Q10: B is correct -->
+      <input type="radio" name="b_q10" id="b_q10_a" class="hidden-radio b-w b-q10-w" />
+      <input type="radio" name="b_q10" id="b_q10_b" class="hidden-radio b-c" />
+      <input type="radio" name="b_q10" id="b_q10_c" class="hidden-radio b-w b-q10-w" />
+      <input type="radio" name="b_q10" id="b_q10_d" class="hidden-radio b-w b-q10-w" />
+      <input type="radio" name="b_q10" id="b_q10_s" class="hidden-radio b-s b-q10-w" />
+
+      <!-- ==========================================
+           RED TEAM RADIO CHOICES (Hidden State Store)
+           ========================================== -->
+      <!-- Q1: A is correct -->
+      <input type="radio" name="r_q1" id="r_q1_a" class="hidden-radio r-c" />
+      <input type="radio" name="r_q1" id="r_q1_b" class="hidden-radio r-w r-q1-w" />
+      <input type="radio" name="r_q1" id="r_q1_c" class="hidden-radio r-w r-q1-w" />
+      <input type="radio" name="r_q1" id="r_q1_d" class="hidden-radio r-w r-q1-w" />
+      <input type="radio" name="r_q1" id="r_q1_s" class="hidden-radio r-s r-q1-w" />
+
+      <!-- Q2: B is correct -->
+      <input type="radio" name="r_q2" id="r_q2_a" class="hidden-radio r-w r-q2-w" />
+      <input type="radio" name="r_q2" id="r_q2_b" class="hidden-radio r-c" />
+      <input type="radio" name="r_q2" id="r_q2_c" class="hidden-radio r-w r-q2-w" />
+      <input type="radio" name="r_q2" id="r_q2_d" class="hidden-radio r-w r-q2-w" />
+      <input type="radio" name="r_q2" id="r_q2_s" class="hidden-radio r-s r-q2-w" />
+
+      <!-- Q3: C is correct -->
+      <input type="radio" name="r_q3" id="r_q3_a" class="hidden-radio r-w r-q3-w" />
+      <input type="radio" name="r_q3" id="r_q3_b" class="hidden-radio r-w r-q3-w" />
+      <input type="radio" name="r_q3" id="r_q3_c" class="hidden-radio r-c" />
+      <input type="radio" name="r_q3" id="r_q3_d" class="hidden-radio r-w r-q3-w" />
+      <input type="radio" name="r_q3" id="r_q3_s" class="hidden-radio r-s r-q3-w" />
+
+      <!-- Q4: B is correct -->
+      <input type="radio" name="r_q4" id="r_q4_a" class="hidden-radio r-w r-q4-w" />
+      <input type="radio" name="r_q4" id="r_q4_b" class="hidden-radio r-c" />
+      <input type="radio" name="r_q4" id="r_q4_c" class="hidden-radio r-w r-q4-w" />
+      <input type="radio" name="r_q4" id="r_q4_d" class="hidden-radio r-w r-q4-w" />
+      <input type="radio" name="r_q4" id="r_q4_s" class="hidden-radio r-s r-q4-w" />
+
+      <!-- Q5: C is correct -->
+      <input type="radio" name="r_q5" id="r_q5_a" class="hidden-radio r-w r-q5-w" />
+      <input type="radio" name="r_q5" id="r_q5_b" class="hidden-radio r-w r-q5-w" />
+      <input type="radio" name="r_q5" id="r_q5_c" class="hidden-radio r-c" />
+      <input type="radio" name="r_q5" id="r_q5_d" class="hidden-radio r-w r-q5-w" />
+      <input type="radio" name="r_q5" id="r_q5_s" class="hidden-radio r-s r-q5-w" />
+
+      <!-- Q6: A is correct -->
+      <input type="radio" name="r_q6" id="r_q6_a" class="hidden-radio r-c" />
+      <input type="radio" name="r_q6" id="r_q6_b" class="hidden-radio r-w r-q6-w" />
+      <input type="radio" name="r_q6" id="r_q6_c" class="hidden-radio r-w r-q6-w" />
+      <input type="radio" name="r_q6" id="r_q6_d" class="hidden-radio r-w r-q6-w" />
+      <input type="radio" name="r_q6" id="r_q6_s" class="hidden-radio r-s r-q6-w" />
+
+      <!-- Q7: B is correct -->
+      <input type="radio" name="r_q7" id="r_q7_a" class="hidden-radio r-w r-q7-w" />
+      <input type="radio" name="r_q7" id="r_q7_b" class="hidden-radio r-c" />
+      <input type="radio" name="r_q7" id="r_q7_c" class="hidden-radio r-w r-q7-w" />
+      <input type="radio" name="r_q7" id="r_q7_d" class="hidden-radio r-w r-q7-w" />
+      <input type="radio" name="r_q7" id="r_q7_s" class="hidden-radio r-s r-q7-w" />
+
+      <!-- Q8: A is correct -->
+      <input type="radio" name="r_q8" id="r_q8_a" class="hidden-radio r-c" />
+      <input type="radio" name="r_q8" id="r_q8_b" class="hidden-radio r-w r-q8-w" />
+      <input type="radio" name="r_q8" id="r_q8_c" class="hidden-radio r-w r-q8-w" />
+      <input type="radio" name="r_q8" id="r_q8_d" class="hidden-radio r-w r-q8-w" />
+      <input type="radio" name="r_q8" id="r_q8_s" class="hidden-radio r-s r-q8-w" />
+
+      <!-- Q9: C is correct -->
+      <input type="radio" name="r_q9" id="r_q9_a" class="hidden-radio r-w r-q9-w" />
+      <input type="radio" name="r_q9" id="r_q9_b" class="hidden-radio r-w r-q9-w" />
+      <input type="radio" name="r_q9" id="r_q9_c" class="hidden-radio r-c" />
+      <input type="radio" name="r_q9" id="r_q9_d" class="hidden-radio r-w r-q9-w" />
+      <input type="radio" name="r_q9" id="r_q9_s" class="hidden-radio r-s r-q9-w" />
+
+      <!-- Q10: B is correct -->
+      <input type="radio" name="r_q10" id="r_q10_a" class="hidden-radio r-w r-q10-w" />
+      <input type="radio" name="r_q10" id="r_q10_b" class="hidden-radio r-c" />
+      <input type="radio" name="r_q10" id="r_q10_c" class="hidden-radio r-w r-q10-w" />
+      <input type="radio" name="r_q10" id="r_q10_d" class="hidden-radio r-w r-q10-w" />
+      <input type="radio" name="r_q10" id="r_q10_s" class="hidden-radio r-s r-q10-w" />
+
+      <!-- MAIN APP LAYOUT -->
+      <div class="app-wrapper">
+        <!-- HEADER SCOREBOARD -->
+        <header class="header-board">
+          <div class="header-top">
+            <div class="logo-badge">
+              <div class="logo-icon">⚔️</div>
+              <div class="logo-text">
+                <h1>KÉO CO XANH ĐỎ</h1>
+                <p>100% Thuần HTML &amp; CSS</p>
+              </div>
+            </div>
+            <div class="header-actions">
+              <div class="header-timer-pill" title="Giới hạn 15 giây cho mỗi lượt câu hỏi của mỗi đội">
+                <span>⏱️ 15s / lượt</span>
+              </div>
+              <label for="rules-toggle" class="btn-action" title="Xem luật chơi">
+                <span>📜 Luật chơi</span>
+              </label>
+              <label for="deploy-toggle" class="btn-action btn-primary" title="Hướng dẫn Deploy GitHub Pages">
+                <span>🚀 Deploy GitHub</span>
+              </label>
+              <button type="reset" class="btn-action btn-reset" title="Đặt lại toàn bộ điểm và câu hỏi">
+                <span>🔄 Chơi lại</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Real-time CSS Scores -->
+          <div class="scores-banner">
+            <!-- Blue Team Score -->
+            <div class="team-score-card blue">
+              <div class="team-info">
+                <div class="team-avatar">🔵</div>
+                <div>
+                  <div class="team-name">ĐỘI XANH</div>
+                  <div class="team-correct-badge">Đúng: <span class="blue-correct-val"></span></div>
+                </div>
+              </div>
+              <div class="team-pts">
+                <div class="team-pts-label">Điểm số</div>
+                <div class="team-pts-num blue-score-val"></div>
+              </div>
+            </div>
+
+            <!-- VS Badge -->
+            <div class="vs-pill">VS</div>
+
+            <!-- Red Team Score -->
+            <div class="team-score-card red">
+              <div class="team-info">
+                <div class="team-avatar">🔴</div>
+                <div>
+                  <div class="team-name">ĐỘI ĐỎ</div>
+                  <div class="team-correct-badge">Đúng: <span class="red-correct-val"></span></div>
+                </div>
+              </div>
+              <div class="team-pts">
+                <div class="team-pts-label">Điểm số</div>
+                <div class="team-pts-num red-score-val"></div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- MAIN BATTLE ARENA & QUESTION COLUMNS -->
+        <main class="battle-arena-layout">
+          <!-- =============================================================
+               BLUE TEAM QUESTION PANEL (10 QUESTIONS - BEHIND BLUE TEAM)
+               ============================================================= -->
+          <section class="team-column blue-side">
+            <div class="team-column-header">
+              <div class="team-header-main">
+                <div class="team-column-title">
+                  <span>🔵</span>
+                  <span>BẢNG CÂU HỎI ĐỘI XANH</span>
+                </div>
+                <div class="team-position-badge blue-pos">
+                  <span>🛡️ Vị trí: Sau lưng Đội Xanh</span>
+                </div>
+              </div>
+              <div class="team-time-tag">⏱️ 15s / câu</div>
+            </div>
+
+            <!-- Tab Radio Controllers for Blue Questions 1 to 10 -->
+            <input type="radio" name="b_tab" id="b_tab_1" class="hidden-radio" checked />
+            <input type="radio" name="b_tab" id="b_tab_2" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_3" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_4" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_5" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_6" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_7" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_8" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_9" class="hidden-radio" />
+            <input type="radio" name="b_tab" id="b_tab_10" class="hidden-radio" />
+
+            <!-- Pill Navigation 1..10 -->
+            <div class="pills-nav">
+              <label for="b_tab_1" class="nav-pill">1</label>
+              <label for="b_tab_2" class="nav-pill">2</label>
+              <label for="b_tab_3" class="nav-pill">3</label>
+              <label for="b_tab_4" class="nav-pill">4</label>
+              <label for="b_tab_5" class="nav-pill">5</label>
+              <label for="b_tab_6" class="nav-pill">6</label>
+              <label for="b_tab_7" class="nav-pill">7</label>
+              <label for="b_tab_8" class="nav-pill">8</label>
+              <label for="b_tab_9" class="nav-pill">9</label>
+              <label for="b_tab_10" class="nav-pill">10</label>
+            </div>
+
+            <!-- Blue Cards Container -->
+            <div class="cards-container">
+              <!-- Blue Q1 -->
+              <div class="question-card" id="b_card_1">
+                <div class="question-header">
+                  <span class="q-tag">Câu 1 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Sinh học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Con vật nào sau đây là loài động vật có vú nhưng lại đẻ trứng?</h3>
+                <div class="options-grid">
+                  <label for="b_q1_a" class="option-btn"><span class="option-key">A</span><span>Cá voi xanh</span></label>
+                  <label for="b_q1_b" class="option-btn"><span class="option-key">B</span><span>Cá heo</span></label>
+                  <label for="b_q1_c" class="option-btn opt-correct"><span class="option-key">C</span><span>Thú mỏ vịt</span></label>
+                  <label for="b_q1_d" class="option-btn"><span class="option-key">D</span><span>Loài dơi</span></label>
+                </div>
+                <!-- 15s Timeout Alert -->
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q1_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <!-- Pure CSS Feedback -->
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Thú mỏ vịt và thú lông nhím là hai loài động vật có vú kỳ lạ duy nhất trên thế giới đẻ trứng thay vì sinh con trực tiếp.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>C. Thú mỏ vịt</strong>. Cá voi, cá heo và dơi đều là thú sinh con và nuôi con bằng sữa mẹ.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q1_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_2" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q2 -->
+              <div class="question-card" id="b_card_2">
+                <div class="question-header">
+                  <span class="q-tag">Câu 2 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Địa lý Việt Nam</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Đỉnh núi cao nhất Việt Nam và toàn Đông Dương là đỉnh núi nào?</h3>
+                <div class="options-grid">
+                  <label for="b_q2_a" class="option-btn opt-correct"><span class="option-key">A</span><span>Fansipan (3.143m)</span></label>
+                  <label for="b_q2_b" class="option-btn"><span class="option-key">B</span><span>Pu Si Lung</span></label>
+                  <label for="b_q2_c" class="option-btn"><span class="option-key">C</span><span>Bạch Mộc Lương Tử</span></label>
+                  <label for="b_q2_d" class="option-btn"><span class="option-key">D</span><span>Ngũ Chỉ Sơn</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q2_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Fansipan cao 3.143m thuộc dãy Hoàng Liên Sơn, được vinh danh là "Nóc nhà Đông Dương".</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>A. Fansipan (3.143m)</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q2_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_3" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q3 -->
+              <div class="question-card" id="b_card_3">
+                <div class="question-header">
+                  <span class="q-tag">Câu 3 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Hóa học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Trong bảng tuần hoàn hóa học, nguyên tố "Fe" là ký hiệu của kim loại nào?</h3>
+                <div class="options-grid">
+                  <label for="b_q3_a" class="option-btn"><span class="option-key">A</span><span>Đồng</span></label>
+                  <label for="b_q3_b" class="option-btn opt-correct"><span class="option-key">B</span><span>Sắt</span></label>
+                  <label for="b_q3_c" class="option-btn"><span class="option-key">C</span><span>Nhôm</span></label>
+                  <label for="b_q3_d" class="option-btn"><span class="option-key">D</span><span>Vàng</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q3_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Fe bắt nguồn từ chữ Ferrum trong tiếng Latinh, chỉ nguyên tố Sắt có số nguyên tử 26.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. Sắt</strong> (Ferrum).</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q3_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_4" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q4 -->
+              <div class="question-card" id="b_card_4">
+                <div class="question-header">
+                  <span class="q-tag">Câu 4 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Thiên văn học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Hành tinh nào nằm ở vị trí gần Mặt Trời nhất trong Hệ Mặt Trời?</h3>
+                <div class="options-grid">
+                  <label for="b_q4_a" class="option-btn"><span class="option-key">A</span><span>Sao Kim (Venus)</span></label>
+                  <label for="b_q4_b" class="option-btn"><span class="option-key">B</span><span>Sao Hỏa (Mars)</span></label>
+                  <label for="b_q4_c" class="option-btn opt-correct"><span class="option-key">C</span><span>Sao Thủy (Mercury)</span></label>
+                  <label for="b_q4_d" class="option-btn"><span class="option-key">D</span><span>Trái Đất</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q4_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Sao Thủy là hành tinh gần Mặt Trời nhất với chu kỳ quay quanh Mặt Trời chỉ mất 88 ngày Trái Đất.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>C. Sao Thủy (Mercury)</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q4_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_5" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q5 -->
+              <div class="question-card" id="b_card_5">
+                <div class="question-header">
+                  <span class="q-tag">Câu 5 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Đố vui dân gian</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Đố vui: "Cây gì có mắt không tai, thịt thơm vàng óng ăn hoài chẳng cay"?</h3>
+                <div class="options-grid">
+                  <label for="b_q5_a" class="option-btn"><span class="option-key">A</span><span>Cây ngô / bắp</span></label>
+                  <label for="b_q5_b" class="option-btn opt-correct"><span class="option-key">B</span><span>Quả dứa (thơm/khóm)</span></label>
+                  <label for="b_q5_c" class="option-btn"><span class="option-key">C</span><span>Củ khoai tây</span></label>
+                  <label for="b_q5_d" class="option-btn"><span class="option-key">D</span><span>Quả dừa</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q5_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Quả dứa có nhiều mắt dứa xung quanh vỏ bọc, ruột màu vàng óng ngọt mát.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. Quả dứa (thơm/khóm)</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q5_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_6" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q6 -->
+              <div class="question-card" id="b_card_6">
+                <div class="question-header">
+                  <span class="q-tag">Câu 6 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Âm nhạc &amp; Lịch sử</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Ai là tác giả của bản Quốc ca nước CHXHCN Việt Nam (Tiến quân ca)?</h3>
+                <div class="options-grid">
+                  <label for="b_q6_a" class="option-btn opt-correct"><span class="option-key">A</span><span>Nhạc sĩ Văn Cao</span></label>
+                  <label for="b_q6_b" class="option-btn"><span class="option-key">B</span><span>Nhạc sĩ Trịnh Công Sơn</span></label>
+                  <label for="b_q6_c" class="option-btn"><span class="option-key">C</span><span>Nhạc sĩ Phạm Tuyên</span></label>
+                  <label for="b_q6_d" class="option-btn"><span class="option-key">D</span><span>Nhạc sĩ Hoàng Vân</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q6_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Nhạc sĩ Văn Cao sáng tác "Tiến quân ca" vào cuối năm 1944 tại Hà Nội.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>A. Nhạc sĩ Văn Cao</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q6_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_7" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q7 -->
+              <div class="question-card" id="b_card_7">
+                <div class="question-header">
+                  <span class="q-tag">Câu 7 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Địa lý thế giới</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Đâu là đại dương có diện tích và độ sâu lớn nhất trên hành tinh Trái Đất?</h3>
+                <div class="options-grid">
+                  <label for="b_q7_a" class="option-btn"><span class="option-key">A</span><span>Đại Tây Dương</span></label>
+                  <label for="b_q7_b" class="option-btn"><span class="option-key">B</span><span>Ấn Độ Dương</span></label>
+                  <label for="b_q7_c" class="option-btn"><span class="option-key">C</span><span>Bắc Băng Dương</span></label>
+                  <label for="b_q7_d" class="option-btn opt-correct"><span class="option-key">D</span><span>Thái Bình Dương</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q7_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Thái Bình Dương chiếm hơn 30% diện tích bề mặt Trái Đất và chứa rãnh Mariana sâu nhất thế giới.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>D. Thái Bình Dương</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q7_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_8" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q8 -->
+              <div class="question-card" id="b_card_8">
+                <div class="question-header">
+                  <span class="q-tag">Câu 8 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Toán học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Trong hình học phẳng, một tam giác đều có mỗi góc trong bằng bao nhiêu độ?</h3>
+                <div class="options-grid">
+                  <label for="b_q8_a" class="option-btn"><span class="option-key">A</span><span>45°</span></label>
+                  <label for="b_q8_b" class="option-btn opt-correct"><span class="option-key">B</span><span>60°</span></label>
+                  <label for="b_q8_c" class="option-btn"><span class="option-key">C</span><span>90°</span></label>
+                  <label for="b_q8_d" class="option-btn"><span class="option-key">D</span><span>120°</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q8_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Tổng 3 góc trong tam giác là 180°. Trong tam giác đều: 180° : 3 = 60°.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. 60°</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q8_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_9" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q9 -->
+              <div class="question-card" id="b_card_9">
+                <div class="question-header">
+                  <span class="q-tag">Câu 9 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Địa lý quốc tế</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Quốc gia nào có diện tích lãnh thổ tự nhiên lớn nhất thế giới?</h3>
+                <div class="options-grid">
+                  <label for="b_q9_a" class="option-btn"><span class="option-key">A</span><span>Canada</span></label>
+                  <label for="b_q9_b" class="option-btn"><span class="option-key">B</span><span>Trung Quốc</span></label>
+                  <label for="b_q9_c" class="option-btn"><span class="option-key">C</span><span>Hoa Kỳ</span></label>
+                  <label for="b_q9_d" class="option-btn opt-correct"><span class="option-key">D</span><span>Liên bang Nga</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q9_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Nga có diện tích hơn 17.1 triệu km², trải dài qua 11 múi giờ và hai châu lục Á - Âu.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>D. Liên bang Nga</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q9_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="b_tab_10" class="btn-next-tab">Câu cuối cùng ➔</label>
+                </div>
+              </div>
+
+              <!-- Blue Q10 -->
+              <div class="question-card" id="b_card_10">
+                <div class="question-header">
+                  <span class="q-tag">Câu 10 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Địa lý Việt Nam</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Dòng sông Mê Kông chảy vào miền Tây Nam Bộ Việt Nam được gọi là gì?</h3>
+                <div class="options-grid">
+                  <label for="b_q10_a" class="option-btn"><span class="option-key">A</span><span>Sông Hồng</span></label>
+                  <label for="b_q10_b" class="option-btn opt-correct"><span class="option-key">B</span><span>Sông Cửu Long (Tiền &amp; Hậu)</span></label>
+                  <label for="b_q10_c" class="option-btn"><span class="option-key">C</span><span>Sông Đồng Nai</span></label>
+                  <label for="b_q10_d" class="option-btn"><span class="option-key">D</span><span>Sông Hương</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="b_q10_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Khi vào Việt Nam, sông Mê Kông rẽ thành 2 nhánh chính là Sông Tiền và Sông Hậu, đổ ra biển với tên gọi Cửu Long.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. Sông Cửu Long (Tiền &amp; Hậu)</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="b_q10_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <span style="font-size:0.8rem; font-weight:800; color:#2563eb;">Đã xong 10 câu!</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- =============================================================
+               CENTER TUG OF WAR ARENA (BETWEEN BLUE AND RED TEAMS)
+               The Question Boards stand directly BEHIND each team's back
+               ============================================================= -->
+          <section class="arena-card center-arena" id="arena_stage_panel">
+            <div class="arena-header">
+              <div class="arena-header-left">
+                <span>◀ ĐỘI XANH (TRÁI)</span>
+              </div>
+              <div class="arena-header-center">
+                <span>⚖️ SÂN KÉO CO ĐỐI KHÁNG</span>
+              </div>
+              <div class="arena-header-right">
+                <span>ĐỘI ĐỎ (PHẢI) ▶</span>
+              </div>
+            </div>
+
+            <div class="arena-stage">
+              <svg class="svg-arena" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#bfdbfe" />
+                    <stop offset="100%" stop-color="#93c5fd" />
+                  </linearGradient>
+                  <linearGradient id="grassGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#4ade80" />
+                    <stop offset="100%" stop-color="#22c55e" />
+                  </linearGradient>
+                  <linearGradient id="ropeGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#b45309" />
+                    <stop offset="50%" stop-color="#d97706" />
+                    <stop offset="100%" stop-color="#b45309" />
+                  </linearGradient>
+                  <filter id="shadowFilter" x="-10%" y="-10%" width="120%" height="120%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.25" />
+                  </filter>
+                </defs>
+
+                <!-- Sky background -->
+                <rect x="0" y="0" width="1000" height="110" fill="url(#skyGrad)" />
+                
+                <!-- Stadium Audience Silhouettes in Background -->
+                <g fill="#93c5fd" opacity="0.45">
+                  <circle cx="160" cy="84" r="13" /><circle cx="210" cy="87" r="12" />
+                  <circle cx="300" cy="85" r="13" /><circle cx="340" cy="83" r="14" />
+                  <circle cx="650" cy="85" r="13" /><circle cx="700" cy="83" r="14" />
+                  <circle cx="800" cy="84" r="13" /><circle cx="850" cy="87" r="12" />
+                  <rect x="0" y="95" width="1000" height="15" fill="#60a5fa" />
+                </g>
+
+                <!-- Grass Field Ground -->
+                <rect x="0" y="110" width="1000" height="90" fill="url(#grassGrad)" />
+                
+                <!-- Danger Zones -->
+                <rect x="0" y="110" width="180" height="90" fill="rgba(37, 99, 235, 0.15)" />
+                <rect x="820" y="110" width="180" height="90" fill="rgba(220, 38, 38, 0.15)" />
+
+                <!-- Field Markings -->
+                <line x1="500" y1="100" x2="500" y2="200" stroke="#ffffff" stroke-width="4" stroke-dasharray="8 6" opacity="0.9" />
+                <circle cx="500" cy="155" r="28" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.8" />
+                <line x1="280" y1="110" x2="280" y2="200" stroke="#ffffff" stroke-width="2" opacity="0.5" />
+                <line x1="720" y1="110" x2="720" y2="200" stroke="#ffffff" stroke-width="2" opacity="0.5" />
+
+                <!-- STADIUM BILLBOARDS STANDING BEHIND TEAMS' BACKS -->
+                <!-- Blue Team Question Board Billboard in Stadium Behind Their Back -->
+                <g class="stadium-board blue-stand" filter="url(#shadowFilter)">
+                  <!-- Stand Posts -->
+                  <rect x="42" y="80" width="6" height="35" fill="#1e3a8a" rx="2" />
+                  <rect x="110" y="80" width="6" height="35" fill="#1e3a8a" rx="2" />
+                  <!-- Signboard Frame -->
+                  <rect x="20" y="14" width="118" height="72" fill="#0f172a" stroke="#3b82f6" stroke-width="2.5" rx="6" />
+                  <rect x="24" y="18" width="110" height="64" fill="#1e293b" rx="4" />
+                  <rect x="24" y="18" width="110" height="18" fill="#1d4ed8" rx="3" />
+                  <text x="79" y="31" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif">📋 BẢNG CÂU HỎI</text>
+                  <text x="79" y="47" text-anchor="middle" fill="#60a5fa" font-size="10.5" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif">ĐỘI XANH 🔵</text>
+                  <line x1="32" y1="52" x2="126" y2="52" stroke="#334155" stroke-width="1" />
+                  <text x="79" y="64" text-anchor="middle" fill="#fde047" font-size="8" font-weight="800" font-family="'Plus Jakarta Sans', sans-serif">⏱️ 15S • 10 CÂU</text>
+                  <text x="79" y="75" text-anchor="middle" fill="#93c5fd" font-size="7.5" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">◀ SAU LƯNG ĐỘI</text>
+                </g>
+
+                <!-- Red Team Question Board Billboard in Stadium Behind Their Back -->
+                <g class="stadium-board red-stand" filter="url(#shadowFilter)">
+                  <!-- Stand Posts -->
+                  <rect x="884" y="80" width="6" height="35" fill="#7f1d1d" rx="2" />
+                  <rect x="952" y="80" width="6" height="35" fill="#7f1d1d" rx="2" />
+                  <!-- Signboard Frame -->
+                  <rect x="862" y="14" width="118" height="72" fill="#0f172a" stroke="#ef4444" stroke-width="2.5" rx="6" />
+                  <rect x="866" y="18" width="110" height="64" fill="#1e293b" rx="4" />
+                  <rect x="866" y="18" width="110" height="18" fill="#b91c1c" rx="3" />
+                  <text x="921" y="31" text-anchor="middle" fill="#ffffff" font-size="8.5" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif">📋 BẢNG CÂU HỎI</text>
+                  <text x="921" y="47" text-anchor="middle" fill="#f87171" font-size="10.5" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif">🔴 ĐỘI ĐỎ</text>
+                  <line x1="874" y1="52" x2="968" y2="52" stroke="#334155" stroke-width="1" />
+                  <text x="921" y="64" text-anchor="middle" fill="#fde047" font-size="8" font-weight="800" font-family="'Plus Jakarta Sans', sans-serif">⏱️ 15S • 10 CÂU</text>
+                  <text x="921" y="75" text-anchor="middle" fill="#fca5a5" font-size="7.5" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">SAU LƯNG ĐỘI ▶</text>
+                </g>
+
+                <!-- DYNAMIC PHYSICAL TUGGING SYSTEM (Moves with CSS transform) -->
+                <g class="tug-system" filter="url(#shadowFilter)">
+                  <!-- Tug-of-war Rope -->
+                  <path d="M 120 150 Q 500 155 880 150" fill="none" stroke="url(#ropeGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="14 3" />
+                  
+                  <!-- Center Red Ribbon / Flag on the rope -->
+                  <g transform="translate(500, 153)">
+                    <!-- Ribbon Knot -->
+                    <circle cx="0" cy="0" r="8" fill="#ef4444" stroke="#ffffff" stroke-width="2" />
+                    <!-- Ribbon Tails -->
+                    <polygon points="0,0 -8,32 0,26 8,32" fill="#ef4444" stroke="#991b1b" stroke-width="1" />
+                    <polygon points="0,0 -14,24 -4,22" fill="#dc2626" />
+                  </g>
+
+                  <!-- BLUE TEAM (3 PULLERS ON LEFT) -->
+                  <g class="blue-team-char" transform="translate(0, 0)">
+                    <!-- Blue Puller 1 (Leader - nearest to center) -->
+                    <g transform="translate(360, 140)">
+                      <!-- Shadow -->
+                      <ellipse cx="-10" cy="28" rx="20" ry="6" fill="rgba(0,0,0,0.2)" />
+                      <!-- Legs leaning back -->
+                      <path d="M -8 10 L -24 28 M 4 10 L 14 28" stroke="#1e3a8a" stroke-width="7" stroke-linecap="round" />
+                      <!-- Body leaning back 25deg -->
+                      <path d="M 0 12 L -18 -15" stroke="#2563eb" stroke-width="16" stroke-linecap="round" />
+                      <!-- Head with headband -->
+                      <circle cx="-24" cy="-28" r="13" fill="#fbcfe8" stroke="#1e40af" stroke-width="2" />
+                      <rect x="-37" y="-33" width="26" height="5" fill="#1d4ed8" rx="2" />
+                      <!-- Smiling/straining face -->
+                      <circle cx="-20" cy="-28" r="2" fill="#0f172a" />
+                      <path d="M -22 -23 Q -18 -20 -15 -24" fill="none" stroke="#0f172a" stroke-width="1.5" />
+                      <!-- Arms gripping rope -->
+                      <path d="M -16 -6 L 10 10 M -18 -4 L 4 11" stroke="#3b82f6" stroke-width="6" stroke-linecap="round" />
+                    </g>
+
+                    <!-- Blue Puller 2 (Middle) -->
+                    <g transform="translate(270, 140)">
+                      <ellipse cx="-10" cy="28" rx="20" ry="6" fill="rgba(0,0,0,0.2)" />
+                      <path d="M -8 10 L -24 28 M 4 10 L 14 28" stroke="#1e3a8a" stroke-width="7" stroke-linecap="round" />
+                      <path d="M 0 12 L -18 -15" stroke="#1d4ed8" stroke-width="18" stroke-linecap="round" />
+                      <circle cx="-24" cy="-28" r="13" fill="#fed7aa" stroke="#1e40af" stroke-width="2" />
+                      <rect x="-37" y="-33" width="26" height="5" fill="#2563eb" rx="2" />
+                      <circle cx="-20" cy="-28" r="2" fill="#0f172a" />
+                      <path d="M -22 -23 Q -18 -20 -15 -24" fill="none" stroke="#0f172a" stroke-width="1.5" />
+                      <path d="M -16 -6 L 10 10 M -18 -4 L 4 11" stroke="#2563eb" stroke-width="6" stroke-linecap="round" />
+                    </g>
+
+                    <!-- Blue Puller 3 (Anchor - Leftmost, closest to the Blue question board behind him) -->
+                    <g transform="translate(180, 140)">
+                      <ellipse cx="-10" cy="28" rx="22" ry="7" fill="rgba(0,0,0,0.2)" />
+                      <path d="M -8 10 L -26 28 M 4 10 L 12 28" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round" />
+                      <path d="M 0 12 L -20 -15" stroke="#1e40af" stroke-width="20" stroke-linecap="round" />
+                      <circle cx="-26" cy="-28" r="14" fill="#fde68a" stroke="#1e40af" stroke-width="2" />
+                      <rect x="-40" y="-33" width="28" height="5" fill="#1e3a8a" rx="2" />
+                      <circle cx="-22" cy="-28" r="2" fill="#0f172a" />
+                      <path d="M -24 -23 Q -20 -19 -16 -23" fill="none" stroke="#0f172a" stroke-width="1.5" />
+                      <!-- Rope wrapped around waist -->
+                      <path d="M -18 -6 L 8 10" stroke="#1d4ed8" stroke-width="7" stroke-linecap="round" />
+                    </g>
+                  </g>
+
+                  <!-- RED TEAM (3 PULLERS ON RIGHT) -->
+                  <g class="red-team-char" transform="translate(0, 0)">
+                    <!-- Red Puller 1 (Leader - nearest to center) -->
+                    <g transform="translate(640, 140)">
+                      <ellipse cx="10" cy="28" rx="20" ry="6" fill="rgba(0,0,0,0.2)" />
+                      <path d="M 8 10 L 24 28 M -4 10 L -14 28" stroke="#7f1d1d" stroke-width="7" stroke-linecap="round" />
+                      <path d="M 0 12 L 18 -15" stroke="#dc2626" stroke-width="16" stroke-linecap="round" />
+                      <circle cx="24" cy="-28" r="13" fill="#fbcfe8" stroke="#991b1b" stroke-width="2" />
+                      <rect x="11" y="-33" width="26" height="5" fill="#b91c1c" rx="2" />
+                      <circle cx="20" cy="-28" r="2" fill="#0f172a" />
+                      <path d="M 22 -23 Q 18 -20 15 -24" fill="none" stroke="#0f172a" stroke-width="1.5" />
+                      <path d="M 16 -6 L -10 10 M 18 -4 L -4 11" stroke="#ef4444" stroke-width="6" stroke-linecap="round" />
+                    </g>
+
+                    <!-- Red Puller 2 (Middle) -->
+                    <g transform="translate(730, 140)">
+                      <ellipse cx="10" cy="28" rx="20" ry="6" fill="rgba(0,0,0,0.2)" />
+                      <path d="M 8 10 L 24 28 M -4 10 L -14 28" stroke="#7f1d1d" stroke-width="7" stroke-linecap="round" />
+                      <path d="M 0 12 L 18 -15" stroke="#b91c1c" stroke-width="18" stroke-linecap="round" />
+                      <circle cx="24" cy="-28" r="13" fill="#fed7aa" stroke="#991b1b" stroke-width="2" />
+                      <rect x="11" y="-33" width="26" height="5" fill="#dc2626" rx="2" />
+                      <circle cx="20" cy="-28" r="2" fill="#0f172a" />
+                      <path d="M 22 -23 Q 18 -20 15 -24" fill="none" stroke="#0f172a" stroke-width="1.5" />
+                      <path d="M 16 -6 L -10 10 M 18 -4 L -4 11" stroke="#dc2626" stroke-width="6" stroke-linecap="round" />
+                    </g>
+
+                    <!-- Red Puller 3 (Anchor - Rightmost, closest to the Red question board behind him) -->
+                    <g transform="translate(820, 140)">
+                      <ellipse cx="10" cy="28" rx="22" ry="7" fill="rgba(0,0,0,0.2)" />
+                      <path d="M 8 10 L 26 28 M -4 10 L -12 28" stroke="#7f1d1d" stroke-width="8" stroke-linecap="round" />
+                      <path d="M 0 12 L 20 -15" stroke="#991b1b" stroke-width="20" stroke-linecap="round" />
+                      <circle cx="26" cy="-28" r="14" fill="#fde68a" stroke="#991b1b" stroke-width="2" />
+                      <rect x="12" y="-33" width="28" height="5" fill="#7f1d1d" rx="2" />
+                      <circle cx="22" cy="-28" r="2" fill="#0f172a" />
+                      <path d="M 24 -23 Q 20 -19 16 -23" fill="none" stroke="#0f172a" stroke-width="1.5" />
+                      <path d="M 18 -6 L -8 10" stroke="#b91c1c" stroke-width="7" stroke-linecap="round" />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Arena Live Status & Guidance Bar -->
+            <div class="arena-footer-bar">
+              <div class="footer-team-hint blue-hint">
+                <span class="hint-arrow">◀</span>
+                <span class="hint-name">Bảng Đội Xanh</span>
+                <span class="hint-score-tag">+100đ</span>
+              </div>
+              <div class="footer-center-hint">
+                <span class="arena-live-icon">⚡</span>
+                <span>Chọn câu hỏi sau lưng để tiếp sức kéo dây!</span>
+              </div>
+              <div class="footer-team-hint red-hint">
+                <span class="hint-score-tag">+100đ</span>
+                <span class="hint-name">Bảng Đội Đỏ</span>
+                <span class="hint-arrow">▶</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- =============================================================
+               RED TEAM QUESTION PANEL (10 QUESTIONS - BEHIND RED TEAM)
+               ============================================================= -->
+          <section class="team-column red-side">
+            <div class="team-column-header">
+              <div class="team-header-main">
+                <div class="team-column-title">
+                  <span>🔴</span>
+                  <span>BẢNG CÂU HỎI ĐỘI ĐỎ</span>
+                </div>
+                <div class="team-position-badge red-pos">
+                  <span>🛡️ Vị trí: Sau lưng Đội Đỏ</span>
+                </div>
+              </div>
+              <div class="team-time-tag">⏱️ 15s / câu</div>
+            </div>
+
+            <!-- Tab Radio Controllers for Red Questions 1 to 10 -->
+            <input type="radio" name="r_tab" id="r_tab_1" class="hidden-radio" checked />
+            <input type="radio" name="r_tab" id="r_tab_2" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_3" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_4" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_5" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_6" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_7" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_8" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_9" class="hidden-radio" />
+            <input type="radio" name="r_tab" id="r_tab_10" class="hidden-radio" />
+
+            <!-- Pill Navigation 1..10 -->
+            <div class="pills-nav">
+              <label for="r_tab_1" class="nav-pill">1</label>
+              <label for="r_tab_2" class="nav-pill">2</label>
+              <label for="r_tab_3" class="nav-pill">3</label>
+              <label for="r_tab_4" class="nav-pill">4</label>
+              <label for="r_tab_5" class="nav-pill">5</label>
+              <label for="r_tab_6" class="nav-pill">6</label>
+              <label for="r_tab_7" class="nav-pill">7</label>
+              <label for="r_tab_8" class="nav-pill">8</label>
+              <label for="r_tab_9" class="nav-pill">9</label>
+              <label for="r_tab_10" class="nav-pill">10</label>
+            </div>
+
+            <!-- Red Cards Container -->
+            <div class="cards-container">
+              <!-- Red Q1 -->
+              <div class="question-card" id="r_card_1">
+                <div class="question-header">
+                  <span class="q-tag">Câu 1 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Vật lý &amp; Hóa học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Kim loại duy nhất ở thể lỏng ở nhiệt độ phòng (25°C) là kim loại nào?</h3>
+                <div class="options-grid">
+                  <label for="r_q1_a" class="option-btn opt-correct"><span class="option-key">A</span><span>Thủy ngân (Hg)</span></label>
+                  <label for="r_q1_b" class="option-btn"><span class="option-key">B</span><span>Chì (Pb)</span></label>
+                  <label for="r_q1_c" class="option-btn"><span class="option-key">C</span><span>Thiếc (Sn)</span></label>
+                  <label for="r_q1_d" class="option-btn"><span class="option-key">D</span><span>Gallium (Ga)</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q1_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Thủy ngân (Hg) là kim loại duy nhất có nhiệt độ nóng chảy thấp tới -38.83°C nên ở thể lỏng tại nhiệt độ phòng.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>A. Thủy ngân (Hg)</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q1_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_2" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q2 -->
+              <div class="question-card" id="r_card_2">
+                <div class="question-header">
+                  <span class="q-tag">Câu 2 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Di sản Việt Nam</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Vịnh biển nào của Việt Nam hai lần được UNESCO công nhận là Di sản Thế giới?</h3>
+                <div class="options-grid">
+                  <label for="r_q2_a" class="option-btn"><span class="option-key">A</span><span>Vịnh Cam Ranh</span></label>
+                  <label for="r_q2_b" class="option-btn opt-correct"><span class="option-key">B</span><span>Vịnh Hạ Long</span></label>
+                  <label for="r_q2_c" class="option-btn"><span class="option-key">C</span><span>Vịnh Nha Trang</span></label>
+                  <label for="r_q2_d" class="option-btn"><span class="option-key">D</span><span>Vịnh Lăng Cô</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q2_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Vịnh Hạ Long được UNESCO công nhận năm 1994 về giá trị cảnh quan và năm 2000 về giá trị địa chất, địa mạo.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. Vịnh Hạ Long</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q2_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_3" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q3 -->
+              <div class="question-card" id="r_card_3">
+                <div class="question-header">
+                  <span class="q-tag">Câu 3 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Đố chữ thông minh</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Câu đố chữ: "Con gì đầu dê mà mình lại ốc"?</h3>
+                <div class="options-grid">
+                  <label for="r_q3_a" class="option-btn"><span class="option-key">A</span><span>Con tắc kè</span></label>
+                  <label for="r_q3_b" class="option-btn"><span class="option-key">B</span><span>Con ốc sên</span></label>
+                  <label for="r_q3_c" class="option-btn opt-correct"><span class="option-key">C</span><span>Con dốc</span></label>
+                  <label for="r_q3_d" class="option-btn"><span class="option-key">D</span><span>Con ếch</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q3_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Ghép chữ cái đầu của "Dê" (D) với chữ "Ốc" ta được chữ "DỐC"!</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>C. Con dốc</strong> (Chữ D của Dê + Ốc = Dốc).</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q3_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_4" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q4 -->
+              <div class="question-card" id="r_card_4">
+                <div class="question-header">
+                  <span class="q-tag">Câu 4 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Sinh học cơ thể</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Cơ quan nội tạng nào giữ vai trò chính trong việc lọc máu tạo nước tiểu?</h3>
+                <div class="options-grid">
+                  <label for="r_q4_a" class="option-btn"><span class="option-key">A</span><span>Lá gan</span></label>
+                  <label for="r_q4_b" class="option-btn opt-correct"><span class="option-key">B</span><span>Hai quả thận</span></label>
+                  <label for="r_q4_c" class="option-btn"><span class="option-key">C</span><span>Phổi</span></label>
+                  <label for="r_q4_d" class="option-btn"><span class="option-key">D</span><span>Dạ dày</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q4_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Hai quả thận chứa hàng triệu đơn vị lọc (nephron) lọc khoảng 180 lít máu mỗi ngày để bài tiết chất thải.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. Hai quả thận</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q4_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_5" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q5 -->
+              <div class="question-card" id="r_card_5">
+                <div class="question-header">
+                  <span class="q-tag">Câu 5 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Toán học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Số nguyên tố nhỏ nhất và cũng là số nguyên tố chẵn duy nhất là số nào?</h3>
+                <div class="options-grid">
+                  <label for="r_q5_a" class="option-btn"><span class="option-key">A</span><span>Số 0</span></label>
+                  <label for="r_q5_b" class="option-btn"><span class="option-key">B</span><span>Số 1</span></label>
+                  <label for="r_q5_c" class="option-btn opt-correct"><span class="option-key">C</span><span>Số 2</span></label>
+                  <label for="r_q5_d" class="option-btn"><span class="option-key">D</span><span>Số 3</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q5_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Số 2 chỉ chia hết cho 1 và chính nó, là số nguyên tố đầu tiên và là số chẵn duy nhất.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>C. Số 2</strong> (Số 0 và 1 không phải là số nguyên tố).</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q5_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_6" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q6 -->
+              <div class="question-card" id="r_card_6">
+                <div class="question-header">
+                  <span class="q-tag">Câu 6 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Lịch sử Việt Nam</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Ngày Giải phóng hoàn toàn miền Nam, Thống nhất đất nước là ngày nào?</h3>
+                <div class="options-grid">
+                  <label for="r_q6_a" class="option-btn opt-correct"><span class="option-key">A</span><span>30/04/1975</span></label>
+                  <label for="r_q6_b" class="option-btn"><span class="option-key">B</span><span>02/09/1945</span></label>
+                  <label for="r_q6_c" class="option-btn"><span class="option-key">C</span><span>07/05/1954</span></label>
+                  <label for="r_q6_d" class="option-btn"><span class="option-key">D</span><span>19/08/1945</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q6_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Ngày 30/4/1975, Chiến dịch Hồ Chí Minh toàn thắng, non sông thu về một mối.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>A. 30/04/1975</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q6_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_7" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q7 -->
+              <div class="question-card" id="r_card_7">
+                <div class="question-header">
+                  <span class="q-tag">Câu 7 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Thế giới động vật</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Loài chim nào sau đây là loài chim duy nhất có khả năng bay lùi?</h3>
+                <div class="options-grid">
+                  <label for="r_q7_a" class="option-btn"><span class="option-key">A</span><span>Chim cánh cụt</span></label>
+                  <label for="r_q7_b" class="option-btn opt-correct"><span class="option-key">B</span><span>Chim ruồi (Hummingbird)</span></label>
+                  <label for="r_q7_c" class="option-btn"><span class="option-key">C</span><span>Chim bói cá</span></label>
+                  <label for="r_q7_d" class="option-btn"><span class="option-key">D</span><span>Chim én</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q7_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Cấu trúc khớp cánh linh hoạt và tần số đập cánh lên tới 80 lần/giây giúp chim ruồi bay lùi và lơ lửng tại chỗ.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. Chim ruồi (Hummingbird)</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q7_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_8" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q8 -->
+              <div class="question-card" id="r_card_8">
+                <div class="question-header">
+                  <span class="q-tag">Câu 8 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Hội họa thế giới</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Bức họa nổi tiếng "Nàng Mona Lisa" với nụ cười bí ẩn là của ai?</h3>
+                <div class="options-grid">
+                  <label for="r_q8_a" class="option-btn opt-correct"><span class="option-key">A</span><span>Leonardo da Vinci</span></label>
+                  <label for="r_q8_b" class="option-btn"><span class="option-key">B</span><span>Vincent van Gogh</span></label>
+                  <label for="r_q8_c" class="option-btn"><span class="option-key">C</span><span>Pablo Picasso</span></label>
+                  <label for="r_q8_d" class="option-btn"><span class="option-key">D</span><span>Michelangelo</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q8_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Leonardo da Vinci đã vẽ kiệt tác Mona Lisa vào thời kỳ Phục Hưng đầu thế kỷ 16.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>A. Leonardo da Vinci</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q8_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_9" class="btn-next-tab">Câu tiếp theo ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q9 -->
+              <div class="question-card" id="r_card_9">
+                <div class="question-header">
+                  <span class="q-tag">Câu 9 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Vật lý học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Trong hệ đo lường quốc tế (SI), đơn vị đo cường độ dòng điện là gì?</h3>
+                <div class="options-grid">
+                  <label for="r_q9_a" class="option-btn"><span class="option-key">A</span><span>Vôn (V)</span></label>
+                  <label for="r_q9_b" class="option-btn"><span class="option-key">B</span><span>Oát (W)</span></label>
+                  <label for="r_q9_c" class="option-btn opt-correct"><span class="option-key">C</span><span>Ampe (A)</span></label>
+                  <label for="r_q9_d" class="option-btn"><span class="option-key">D</span><span>Jun (J)</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q9_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Ampe (ký hiệu A) là đơn vị đo cường độ dòng điện, đặt theo tên nhà vật lý người Pháp André-Marie Ampère.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>C. Ampe (A)</strong>. (Vôn đo hiệu điện thế, Oát đo công suất).</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q9_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <label for="r_tab_10" class="btn-next-tab">Câu cuối cùng ➔</label>
+                </div>
+              </div>
+
+              <!-- Red Q10 -->
+              <div class="question-card" id="r_card_10">
+                <div class="question-header">
+                  <span class="q-tag">Câu 10 / 10</span>
+                  <div class="q-timer-badge" title="Đếm ngược 15 giây cho câu hỏi này">
+                    <span class="timer-flame">⏱️</span>
+                    <span class="timer-countdown"></span>
+                  </div>
+                  <span class="q-topic">Thiên văn học</span>
+                </div>
+                <div class="timer-track" title="Thời gian còn lại: 15s">
+                  <div class="timer-bar"></div>
+                </div>
+                <h3 class="question-text">Hành tinh nào có thể tích và khối lượng lớn nhất trong Hệ Mặt Trời?</h3>
+                <div class="options-grid">
+                  <label for="r_q10_a" class="option-btn"><span class="option-key">A</span><span>Sao Thổ</span></label>
+                  <label for="r_q10_b" class="option-btn opt-correct"><span class="option-key">B</span><span>Sao Mộc (Jupiter)</span></label>
+                  <label for="r_q10_c" class="option-btn"><span class="option-key">C</span><span>Sao Thiên Vương</span></label>
+                  <label for="r_q10_d" class="option-btn"><span class="option-key">D</span><span>Sao Hải Vương</span></label>
+                </div>
+                <div class="timeout-alert">
+                  <div class="timeout-badge">
+                    <span class="timeout-icon">⏰</span>
+                    <div class="timeout-text">
+                      <div class="timeout-title">HẾT GIỜ (15s)!</div>
+                      <div class="timeout-sub">Đội chưa kịp chọn câu trả lời.</div>
+                    </div>
+                  </div>
+                  <label for="r_q10_s" class="btn-timeout-forfeit">Bỏ qua (-50đ) &amp; Xem đáp án ➔</label>
+                </div>
+                <div class="feedback-box fb-correct">
+                  <div class="fb-title">🎉 CHÍNH XÁC! (+100 điểm &amp; Kéo dây)</div>
+                  <p>Sao Mộc là hành tinh khí khổng lồ, có khối lượng gấp 2.5 lần tổng khối lượng tất cả các hành tinh khác gộp lại.</p>
+                </div>
+                <div class="feedback-box fb-wrong">
+                  <div class="fb-title">❌ CHƯA ĐÚNG! (-50 điểm &amp; Lùi bước)</div>
+                  <p>Đáp án đúng là: <strong>B. Sao Mộc (Jupiter)</strong>.</p>
+                </div>
+                <div class="question-footer">
+                  <label for="r_q10_s" class="btn-skip">Bỏ qua (-50đ &amp; Lùi)</label>
+                  <span style="font-size:0.8rem; font-weight:800; color:#dc2626;">Đã xong 10 câu!</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer-bar">
+          <div class="footer-badge">
+            ✨ Trò chơi chạy 100% bằng HTML &amp; CSS thuần • Không cần JavaScript • Dễ dàng đưa lên GitHub Pages
+          </div>
+        </footer>
+      </div>
+
+      <!-- =============================================================
+           PURE CSS MODAL 1: LUẬT CHƠI
+           ============================================================= -->
+      <div class="modal-wrapper rules-modal-wrapper">
+        <div class="modal-content">
+          <label for="rules-toggle" class="modal-close-btn">&times;</label>
+          <div class="modal-header">
+            <span class="modal-header-icon">📜</span>
+            <h2 class="modal-title">Luật Chơi Kéo Co Trắc Nghiệm</h2>
+          </div>
+          <div class="modal-body">
+            <div class="rule-box">
+              <h4>🎯 Mục tiêu đối kháng</h4>
+              <p>Hai đội Xanh và Đỏ thi đấu trả lời 10 câu hỏi trắc nghiệm song song. Mỗi câu trả lời sẽ tác động trực tiếp đến lực kéo sợi dây trên sân đấu.</p>
+            </div>
+            <div class="rule-box">
+              <h4>⚖️ Cơ chế tính điểm, Thời gian &amp; Lực kéo</h4>
+              <ul style="padding-left: 18px; margin-top: 4px; display: flex; flex-direction: column; gap: 6px;">
+                <li><strong>⏱️ Thời gian 15s / câu:</strong> Mỗi câu hỏi có thanh thời gian đếm ngược 15 giây. Khi đã chọn đáp án, đồng hồ sẽ dừng lại và ghi nhận kết quả. Nếu hết 15s mà chưa chọn, thông báo Hết Giờ sẽ xuất hiện.</li>
+                <li><strong>Trả lời Đúng:</strong> Cộng <span style="color:#16a34a; font-weight:800;">+100 điểm</span> và kéo dây về phía đội mình.</li>
+                <li><strong>Trả lời Sai:</strong> Bị trừ <span style="color:#dc2626; font-weight:800;">-50 điểm</span> và bị lùi chân, dây nghiêng về phía đối thủ.</li>
+                <li><strong>Bỏ qua / Hết giờ:</strong> Bị trừ <span style="color:#dc2626; font-weight:800;">-50 điểm</span>, hiển thị ngay đáp án đúng và lời giải chi tiết.</li>
+              </ul>
+            </div>
+            <div class="rule-box">
+              <h4>🛠️ Công nghệ thuần túy</h4>
+              <p>Toàn bộ cơ chế tính điểm động (CSS Counters), phản hồi câu hỏi đúng/sai, di chuyển dây kéo và mở popup đều hoạt động <strong>100% bằng HTML &amp; CSS</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =============================================================
+           PURE CSS MODAL 2: HƯỚNG DẪN GITHUB PAGES
+           ============================================================= -->
+      <div class="modal-wrapper deploy-modal-wrapper">
+        <div class="modal-content">
+          <label for="deploy-toggle" class="modal-close-btn">&times;</label>
+          <div class="modal-header">
+            <span class="modal-header-icon">🚀</span>
+            <h2 class="modal-title">Deploy Lên GitHub Pages (Chỉ HTML, CSS)</h2>
+          </div>
+          <div class="modal-body">
+            <p>Dự án hiện tại chỉ gồm 2 file tĩnh duy nhất: <span class="code-snippet">index.html</span> và <span class="code-snippet">style.css</span>. Bạn có thể deploy theo 2 cách cực kỳ nhanh:</p>
+            
+            <div class="guide-step">
+              <h5>Cách 1: Kéo thả 2 file vào Repository mới (Dành cho người mới)</h5>
+              <p>1. Tạo một GitHub Repository mới hoàn toàn trống.</p>
+              <p>2. Tải trực tiếp 2 file <code>index.html</code> và <code>style.css</code> lên.</p>
+              <p>3. Vào <strong>Settings ➔ Pages</strong> ➔ Chọn nhánh <strong>main</strong> và thư mục <strong>/ (root)</strong> ➔ Bấm <strong>Save</strong>.</p>
+              <p>4. Web sẽ chạy ngay lập tức!</p>
+            </div>
+
+            <div class="guide-step">
+              <h5>Cách 2: Đẩy cả thư mục này lên GitHub</h5>
+              <p>Chỉ cần <code>git push</code> lên repo, bật GitHub Pages từ nhánh <strong>main</strong> là trang web của bạn đã online khắp thế giới.</p>
+            </div>
+
+            <div style="background:#ecfdf5; border:1px solid #6ee7b7; padding:10px 14px; border-radius:8px; font-size:0.8rem; color:#065f46;">
+              ✅ <strong>Không cần Node.js, không cần npm build, không có file JavaScript.</strong> Bạn có thể mở trực tiếp file <code>index.html</code> trên máy tính bằng Google Chrome, Cốc Cốc, Safari hay Edge để chơi offline ngay lập tức!
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </body>
 </html>
-
